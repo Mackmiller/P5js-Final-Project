@@ -153,6 +153,7 @@ var bird;
 var trees;
 var woodnymph;
 var particles = [];
+var moon15;
 
 function preload(){
   daphnis = loadSound('assets/daphnis.mp3');
@@ -161,8 +162,6 @@ function preload(){
   bird = loadAnimation("assets/bird0.png", "assets/bird1.png");
   woodnymph = loadAnimation("assets/woodnymph0.png", "assets/woodnymph1.png");
   backdrop = loadImage("assets/background.png");
-
-  
 }
  
 function setup() 
@@ -170,6 +169,7 @@ function setup()
   // set canvas size
   createCanvas(1200, 400);
   //DAPHNIS
+  
   nymph = createSprite(1000, 1000, 120, 120);
   var myAnimation = nymph.addAnimation("flying", "assets/nymph0.png", "assets/nymph1.png");
   nymph.addAnimation("moving", "assets/nymphdance_0.png", "assets/nymphdance_4.png");
@@ -187,16 +187,17 @@ function draw()
 {
   background(255);
   image(backdrop, 0,0, 1200,400);
+  textSize(24);
+  text("How can a flute portray a character through music? Click on the water fairy, forest fairy or bird to find out.", 10, 10, 500,500);
 
   
-  //DAPHNIS
+  //WATER NYMPH
  if (mouseX >= 150 && mouseX <= 150+100 && mouseY >= 150 && mouseY <= 150+100) 
   {
     isOverRectangle = true;
   } else {
     isOverRectangle = false;
   }
-
   if(isOverRectangle == true)
   {
     for (var i = 0; i < particles.length; i++) {
@@ -209,7 +210,7 @@ function draw()
 	cursor(ARROW); 
   } 
   
-  //PROK
+  //FOREST NYMPH
   if (mouseX >= 750 && mouseX <= 750+100 && mouseY >= 50 && mouseY <= 50+100) 
   {
     isOverRectangle2 = true;
@@ -237,16 +238,15 @@ function mousePressed(){
     daphnis.play();
     particles.push(new Particle(mouseX, mouseY));
   }
- /* if(isOverRectangle2 == true)
+ if(isOverRectangle2 == true)
   {
     prok.play();
-  } */
+  } 
 }
 
 function Particle(x,y) {
   this.x = x;
   this.y = y;
-  
   this.history = [];
   
   this.update = function(){
@@ -269,10 +269,8 @@ function Particle(x,y) {
   }
   
   this.show = function(){
-    nymph.changeAnimation("flying");
+  
 
-    
-    
     beginShape();
     for (var i = 0; i < this.history.length; i++){
       var pos = this.history[i];
