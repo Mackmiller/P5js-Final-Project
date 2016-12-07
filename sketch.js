@@ -1,262 +1,292 @@
-/*var concert;
-var stardust;
-var moon0;
-var star0;
-var direction = 90; 
-
-function setup() {
-  createCanvas(600,335);
-  moon0 = createSprite(500, 320, 20, 20);
-  moon0.addAnimation("floating", "assets/moon0.png", "assets/moon25.png");
-  star0 = createSprite(2300, 320, 40, 40);
-  star0.addAnimation("shining", "assets/star0.png", "assets/star14.png");
-  stardust = loadImage("assets/stardust.png");
-
-  concert = createVideo('assets/nov7.m4v');
-  concert.loop(); 
-  concert.hide(); 
-                  
-              
-  concert.size(600,600);
-}
-
-function draw() {
-  background(255,255,255);  
-  
-  image(concert,0,0); // draw the video frame to canvas
-  noStroke();
-  fill(0, 0, 0);
-  rect(0, 0, 600, 123);
-  fill(0, 0, 0, 50);
-  rect(0, 123, 600, 23); 
- image(stardust, 600, 150);
-  
-
-  } 
-  scale(.2);
-  drawSprites();
-  
-
-  
-  push();
-  translate(2800,50);
-  rotate(frameCount / -100.0);
-  fill('yellow');
-  star(0, 0, 10, 25, 5); 
-  pop();
-  
-  push();
-  translate(3300,300);
-  rotate(frameCount / -100.0);
-  fill('yellow');
-  star(0, 0, 10, 25, 5); 
-  pop();
-  
-  push();
-  translate(2950,600);
-  rotate(frameCount / -100.0);
-  fill('yellow');
-  star(0, 0, 10, 25, 5); 
-  pop();
-
-  push();
-  translate(2600,300);
-  rotate(frameCount / -100.0);
-  fill('yellow');
-  star(0, 0, 10, 25, 5); 
-  pop();
-  
-  push();
-  translate(2200,100);
-  rotate(frameCount / -100.0);
-  fill('yellow');
-  star(0, 0, 10, 25, 5); 
-  pop();
-  
-  push();
-  translate(1800,480);
-  rotate(frameCount / -100.0);
-  fill('yellow');
-  star(0, 0, 10, 25, 5); 
-  pop();
-  
-  push();
-  translate(1300,200);
-  rotate(frameCount / -100.0);
-  fill('yellow');
-  star(0, 0, 10, 25, 5); 
-  pop();
-  
-  push();
-  translate(850,400);
-  rotate(frameCount / -100.0);
-  fill('yellow');
-  star(0, 0, 10, 25, 5); 
-  pop();
-  
-  push();
-  translate(200,400);
-  rotate(frameCount / -100.0);
-  fill('yellow');
-  star(0, 0, 10, 25, 5); 
-  pop();
-}
-
-function star(x, y, radius1, radius2, npoints) {
-  var angle = TWO_PI / npoints;
-  var halfAngle = angle/2.0;
-  beginShape();
-  for (var a = 0; a < TWO_PI; a += angle) {
-    var sx = x + cos(a) * radius2;
-    var sy = y + sin(a) * radius2;
-    vertex(sx, sy);
-    sx = x + cos(a+halfAngle) * radius1;
-    sy = y + sin(a+halfAngle) * radius1;
-    vertex(sx, sy);
-  }
-  endShape(CLOSE);} */
-  
-/*var song;
-var button;
-
-function preload(){
-  song = loadSound('assets/daphnis.mp3');
-}
-
-function setup() {
-  createCanvas(200, 200);
-  button = createButton("play");
-  button.mousePressed(togglePlaying);
-  song.setVolume(0.3);
-  background(51);
-}
-
-function togglePlaying(){
- if (!song.isPlaying()){
-  song.play();
-  song.setVolume(0.3);
-  button.html("stop");
-}else {
-  song.stop();
-  button.html("play");
-}
-}
-*/
-
 var backgroundColor;
-var isOverRectangle;
-var isOverRectangle2;
+var isOverRectangle = false;
+var isOverRectangle1 = false;
+var isOverRectangle2 = false;
 var song;
 var nymph;
 var water;
-var bird; 
+var bird;
 var trees;
 var woodnymph;
 var particles = [];
-var moon15;
+var bird1;
+var leaf;
+var leaf1;
+var flower;
+var bud;
+var diameter = 0;
+var maxDiameter = 50;
+var velocity = 1;
+var birdex
+var wnX, wnY;
+var wn1X, wn1Y;
+var wn2X, wn2Y;
+var x, y;
 
-function preload(){
+var fairy = [];
+var fairy2 = [];
+var birdie = [];
+
+
+
+function preload() {
   daphnis = loadSound('assets/daphnis.mp3');
   prok = loadSound('assets/prok.mp3');
+  faune = loadSound('assets/faune.mp3');
   nymph = loadAnimation("assets/nymph0.png", "assets/nymph1.png");
   bird = loadAnimation("assets/bird0.png", "assets/bird1.png");
   woodnymph = loadAnimation("assets/woodnymph0.png", "assets/woodnymph1.png");
   backdrop = loadImage("assets/background.png");
+  birdex = loadImage("assets/birdex.png");
+  leaf = loadImage("assets/leaf.png");
+  leaf1 = loadImage("assets/leaf1.png");
+
+  flower = loadImage("assets/flower.png");
 }
- 
-function setup() 
-{
-  // set canvas size
-  createCanvas(1200, 400);
-  //DAPHNIS
+
+function setup() {
   
+  createCanvas(1200, 400);
+  
+  //WATER FAIRY
   nymph = createSprite(1000, 1000, 120, 120);
   var myAnimation = nymph.addAnimation("flying", "assets/nymph0.png", "assets/nymph1.png");
-  nymph.addAnimation("moving", "assets/nymphdance_0.png", "assets/nymphdance_4.png");
-  
-  //PROK
+
+   for (var i = 0; i < 10; i++) {
+    fairy.push(new Particle(200, 200, "fairy"));
+  }
+
+  //BIRD
   bird = createSprite(4000, 300, 120, 120);
   var myAnimation = bird.addAnimation("bird", "assets/bird0.png", "assets/bird1.png");
-  //SYRINX
+  
+   for (var i = 0; i < 4; i++) {
+    birdie.push(new Particle(800, 100, "birdie"));
+  }
+
+  //FOREST FAIRY
   woodnymph = createSprite(5000, 1150, 120, 120);
   var myAnimation = woodnymph.addAnimation("woods", "assets/woodnymph0.png", "assets/woodnymph1.png");
   
-}
- 
-function draw() 
-{
-  background(255);
-  image(backdrop, 0,0, 1200,400);
-  textSize(24);
-  text("How can a flute portray a character through music? Click on the water fairy, forest fairy or bird to find out.", 10, 10, 500,500);
+   for (var i = 0; i < 10; i++) {
+    fairy2.push(new Particle(1000, 180, "fairy2"));
+  }
 
-  
-  //WATER NYMPH
- if (mouseX >= 150 && mouseX <= 150+100 && mouseY >= 150 && mouseY <= 150+100) 
-  {
-    isOverRectangle = true;
+ 
+
+
+}
+
+
+function draw() {
+  background(255);
+  image(backdrop, 0, 0, 1200, 400);
+  textSize(24);
+  text("How can a flute portray a character through music? Click on the water fairy, forest fairy or bird to find out.", 10, 10, 500, 500);
+
+  // push();
+  // scale(.2);
+  // drawSprites();
+  // pop();
+
+
+  //WATER FAIRY
+  if (mouseX >= 150 && mouseX <= 150 + 100 && mouseY >= 150 && mouseY <= 150 + 100) {
+
+    //console.log(fairy.length);
+    for (var i = 0; i < fairy.length; i++) {
+      fairy[i].update();
+      fairy[i].show();
+    }
+    if (isOverRectangle == false) {
+      //console.log("playing");
+      daphnis.play();
+      isOverRectangle = true;
+    }
   } else {
+    for (var i = 0; i < fairy.length; i++) {
+      fairy[i].x = 200;
+      fairy[i].y = 200;
+    }
+
+    daphnis.stop();
     isOverRectangle = false;
   }
-  if(isOverRectangle == true)
-  {
-    for (var i = 0; i < particles.length; i++) {
-    particles[i].update();
-    particles[i].show();}
-    fill(100);
-    cursor(HAND);
+
+
+  //BIRD
+  if (mouseX >= 750 && mouseX <= 750 + 100 && mouseY >= 50 && mouseY <= 50 + 100) {
+
+    //console.log(birdie.length);
+    for (var i = 0; i < birdie.length; i++) {
+      birdie[i].update();
+      birdie[i].show();
+    }
+    if (isOverRectangle1 == false) {
+      //console.log("playing");
+      prok.play();
+      isOverRectangle1 = true;
+    }
   } else {
-	fill(200); 
-	cursor(ARROW); 
-  } 
+    for (var i = 0; i < birdie.length; i++) {
+      birdie[i].x = 800;
+      birdie[i].y = 100;
+    }
+
+    prok.stop();
+    isOverRectangle1 = false;
+  }
   
-  //FOREST NYMPH
-  if (mouseX >= 750 && mouseX <= 750+100 && mouseY >= 50 && mouseY <= 50+100) 
-  {
-    isOverRectangle2 = true;
+   //FOREST FAIRY
+    if (mouseX >= 950 && mouseX <= 950+100 && mouseY >= 130 && mouseY <= 130+100) {
+
+    //console.log(birdie.length);
+    for (var i = 0; i < fairy2.length; i++) {
+      fairy2[i].update();
+      fairy2[i].show();
+    }
+    if (isOverRectangle2 == false) {
+      //console.log("playing");
+      faune.play();
+      isOverRectangle2 = true;
+    }
   } else {
+    for (var i = 0; i < fairy2.length; i++) {
+      fairy2[i].x = 1000;
+      fairy2[i].y = 180;
+    }
+
+    faune.stop();
     isOverRectangle2 = false;
   }
-  if(isOverRectangle2 == true)
-  {
-    fill(100);
-    cursor(HAND);
-  } else {
-	fill(200); 
-	cursor(ARROW); 
-  } 
-  
+
+
+
+  //   //PROK
+  //   if (mouseX >= 750 && mouseX <= 750+100 && mouseY >= 50 && mouseY <= 50+100) 
+  //   {
+  //     isOverRectangle1 = true;
+  //   } else {
+  //     isOverRectangle1 = false;
+  //   }
+  //   if(isOverRectangle1 == true)
+  //   {
+  //     for (var i = 0; i < particles.length; i++) {
+  //     particles[i].update1();
+  //     particles[i].show1();
+
+  //     if(i == 0){
+  //       wn1X = particles[0].x;
+  //       wn1Y = particles[0].y;
+  //     }
+
+  //     }
+  //     fill(100);
+  //     cursor(HAND);
+  //   } else {
+  // 	fill(200); 
+  // 	cursor(ARROW); 
+
+  //   } 
+
+  //     //FAUNE
+  //   if (mouseX >= 950 && mouseX <= 950+100 && mouseY >= 130 && mouseY <= 130+100) 
+  //   {
+  //     isOverRectangle2 = true;
+  //   } else {
+  //     isOverRectangle2 = false;
+  //   }
+  //   if(isOverRectangle2 == true)
+  //   {
+  //     for (var i = 0; i < particles.length; i++) {
+  //     particles[i].update2();
+  //     particles[i].show2();
+
+  //     if(i == 0){
+  //       wn2X = particles[0].x;
+  //       wn2Y = particles[0].y;
+  //     }
+
+  //     }
+  //     fill(100);
+  //     cursor(HAND);
+  //   } else {
+  // 	fill(200); 
+  // 	cursor(ARROW); 
+
+  //   } 
+  push();
   scale(.2);
   drawSprites();
+  pop();
 
-  
-}
- 
-function mousePressed(){
-  if(isOverRectangle == true)
-  {
-    daphnis.play();
-    particles.push(new Particle(mouseX, mouseY));
-  }
- if(isOverRectangle2 == true)
-  {
-    prok.play();
-  } 
+  //fill(0);
+  //image(bird1, wn1X,wn1Y, 30,30);
+
+
+
+
+
+
 }
 
-function Particle(x,y) {
+/*function mousePressed() {
+  daphnis.pause();
+  // if (isOverRectangle == true) {
+  //   daphnis.play();
+  //   fairy.push(new Particle(mouseX, mouseY));
+  // }
+  // if (isOverRectangle1 == true) {
+  //   prok.play();
+  //   particles.push(new Particle(mouseX, mouseY));
+  // }
+
+  // if (isOverRectangle2 == true) {
+  //   faune.play();
+  //   particles.push(new Particle(mouseX, mouseY));
+  // }
+
+}*/
+
+
+function Particle(x, y, type) {
   this.x = x;
   this.y = y;
   this.history = [];
-  
-  this.update = function(){
-    this.x += random(-10, 10);
-    this.y += random(-10, 10);
-    
-    
+  this.type = type;
+
+  this.update = function() {
+   if(type == "fairy"){
+    this.x += random(-5, 5);
+    this.y += random(-5, 5);
+
     if (this.y > height) {
       this.y = height;
-      this.yspeed *= -.03;
+      this.yspeed *= -.3;
+    }
+
+    if (this.x > width) {
+      this.x = width;
+      this.xspeed *= -.9;
+    }
+
+    var v = createVector(this.x, this.y);
+    this.history.push(v);
+
+    if (this.history.length > 15) {
+      this.history.splice(0, 1);
+    }}
+   if(type == "birdie"){
+     this.x += random(-30, 30);
+    this.y += random(-20, 20);
+    
+   if (this.y > height) {
+      this.y = (height);
+      this.Yspeed = -2;
+    } 
+   if (this.x > width) {
+      this.x = width;
+      this.xspeed *= -.9;
     }
     
     var v = createVector(this.x, this.y);
@@ -265,27 +295,76 @@ function Particle(x,y) {
     if (this.history.length > 30) {
       this.history.splice(0,1);
     }
-   
   }
-  
-  this.show = function(){
+  if(type == "fairy2"){
+    this.x += random(-4, 3);
+    this.y += random(-4, 4);
+   
+    
+    if (this.y > height) {
+      this.y = height;
+      this.y.speed *= -.9;
+    }
+    
+   if (this.x > width) {
+      this.x = width;
+      this.x.speed *= -20;
+    }
+    var v = createVector(this.x, this.y);
+    this.history.push(v);
+    
+    if (this.history.length > 30) {
+      this.history.splice(.8,1);
+      
+    this.move = function(){
+      this.x += 2;
+      this.y =+ 2;
+    }
+    }
   
 
+
+  }
+
+
+  this.show = function() {
+
+  if(type == "fairy"){
     beginShape();
-    for (var i = 0; i < this.history.length; i++){
+    for (var i = 0; i < this.history.length; i++) {
       var pos = this.history[i];
       noStroke();
       fill(16, 154, 141);
-      ellipse(pos.x, pos.y, i,i); //or 8
-      
+      ellipse(pos.x, pos.y, i, i); //or 8
+
     }
     endShape();
   }
+   
+  if(type == "birdie"){
+    beginShape();
+  for (var i = 0; i < this.history.length; i++){
+      var pos = this.history[i];
+      image(birdex, pos.x, pos.y, 30,30); //or 8
+    }
+    endShape();
+  }
+    
+  if(type == "fairy2"){
+     beginShape();
+  for (var i = 0; i < this.history.length; i++){
+      var pos = this.history[i];
+      noStroke();
+      fill(180,	214, 120);
+      image(flower, pos.x, pos.y, 35, 35);
+      //ellipse(pos.x, pos.y, 4,4); //or 8
+    }
+    endShape();
+  }
+    
+    
+    
+  }
 
+  }
 }
-
-
-
-
-
-
