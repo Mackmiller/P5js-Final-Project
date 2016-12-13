@@ -82,15 +82,20 @@ function draw() {
   background(255);
   image(backdrop, 0, 0, 1200, 400);
   textSize(24);
-  text("How can a flute portray a character through music? Click on the water fairy, forest fairy or bird to find out.", 10, 10, 500, 500);
-
-  // push();
-  // scale(.2);
-  // drawSprites();
-  // pop();
+  fill(0, 102, 153);
+  text("How can a flute portray a character through music? Click on the water fairy, forest fairy or bird to see their emotions come to life.", 10, 10, 500, 500);
 
 
   //WATER FAIRY
+  noStroke();
+  fill(255, 90);
+  rect(110, 250, 200,100);
+  textAlign(CENTER);
+  s = "The water fairy is uncertain about her feelings towards another fairy. She is nervous, distant, and can't seem to make up her mind.";
+  fill(50);
+  textSize(12);
+  text(s, 110, 270, 200, 200);
+  
   if (mouseX >= 150 && mouseX <= 150 + 100 && mouseY >= 150 && mouseY <= 150 + 100) {
 
     //console.log(fairy.length);
@@ -115,6 +120,14 @@ function draw() {
 
 
   //BIRD
+  noStroke();
+  fill(255, 90);
+  rect(835, 20, 200,100);
+  textAlign(CENTER);
+  s = "The bird is a happy creature, always flittering and fluttering around the forest without a care in the world, chirping with no end.";
+  fill(50);
+  textSize(12);
+  text(s, 835, 40, 200, 200);
   if (mouseX >= 750 && mouseX <= 750 + 100 && mouseY >= 50 && mouseY <= 50 + 100) {
 
     //console.log(birdie.length);
@@ -138,6 +151,14 @@ function draw() {
   }
   
    //FOREST FAIRY
+  noStroke();
+  fill(255, 90);
+  rect(735, 180, 200,100);
+  textAlign(CENTER);
+  s = "The forest fairy is a wanderer. She prefers solitude in her own space, and doesn't even realize the number of admirers she has.";
+  fill(50);
+  textSize(12);
+  text(s, 735, 200, 200, 200);
     if (mouseX >= 950 && mouseX <= 950+100 && mouseY >= 130 && mouseY <= 130+100) {
 
     //console.log(birdie.length);
@@ -160,93 +181,11 @@ function draw() {
     isOverRectangle2 = false;
   }
 
-
-
-  //   //PROK
-  //   if (mouseX >= 750 && mouseX <= 750+100 && mouseY >= 50 && mouseY <= 50+100) 
-  //   {
-  //     isOverRectangle1 = true;
-  //   } else {
-  //     isOverRectangle1 = false;
-  //   }
-  //   if(isOverRectangle1 == true)
-  //   {
-  //     for (var i = 0; i < particles.length; i++) {
-  //     particles[i].update1();
-  //     particles[i].show1();
-
-  //     if(i == 0){
-  //       wn1X = particles[0].x;
-  //       wn1Y = particles[0].y;
-  //     }
-
-  //     }
-  //     fill(100);
-  //     cursor(HAND);
-  //   } else {
-  // 	fill(200); 
-  // 	cursor(ARROW); 
-
-  //   } 
-
-  //     //FAUNE
-  //   if (mouseX >= 950 && mouseX <= 950+100 && mouseY >= 130 && mouseY <= 130+100) 
-  //   {
-  //     isOverRectangle2 = true;
-  //   } else {
-  //     isOverRectangle2 = false;
-  //   }
-  //   if(isOverRectangle2 == true)
-  //   {
-  //     for (var i = 0; i < particles.length; i++) {
-  //     particles[i].update2();
-  //     particles[i].show2();
-
-  //     if(i == 0){
-  //       wn2X = particles[0].x;
-  //       wn2Y = particles[0].y;
-  //     }
-
-  //     }
-  //     fill(100);
-  //     cursor(HAND);
-  //   } else {
-  // 	fill(200); 
-  // 	cursor(ARROW); 
-
-  //   } 
   push();
   scale(.2);
   drawSprites();
   pop();
-
-  //fill(0);
-  //image(bird1, wn1X,wn1Y, 30,30);
-
-
-
-
-
-
 }
-
-/*function mousePressed() {
-  daphnis.pause();
-  // if (isOverRectangle == true) {
-  //   daphnis.play();
-  //   fairy.push(new Particle(mouseX, mouseY));
-  // }
-  // if (isOverRectangle1 == true) {
-  //   prok.play();
-  //   particles.push(new Particle(mouseX, mouseY));
-  // }
-
-  // if (isOverRectangle2 == true) {
-  //   faune.play();
-  //   particles.push(new Particle(mouseX, mouseY));
-  // }
-
-}*/
 
 
 function Particle(x, y, type) {
@@ -320,10 +259,7 @@ function Particle(x, y, type) {
       this.x += 2;
       this.y =+ 2;
     }
-    }
-  
-
-
+  }
   }
 
 
@@ -361,8 +297,6 @@ function Particle(x, y, type) {
     }
     endShape();
   }
-    
-    
     
   }
 
