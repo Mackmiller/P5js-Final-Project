@@ -1,4 +1,3 @@
-var backgroundColor;
 var isOverRectangle = false;
 var isOverRectangle1 = false;
 var isOverRectangle2 = false;
@@ -13,21 +12,13 @@ var bird1;
 var leaf;
 var leaf1;
 var flower;
-var bud;
-var diameter = 0;
-var maxDiameter = 50;
-var velocity = 1;
 var birdex
 var wnX, wnY;
 var wn1X, wn1Y;
 var wn2X, wn2Y;
-var x, y;
-
 var fairy = [];
 var fairy2 = [];
 var birdie = [];
-
-
 
 function preload() {
   daphnis = loadSound('assets/daphnis.mp3');
@@ -38,9 +29,6 @@ function preload() {
   woodnymph = loadAnimation("assets/woodnymph0.png", "assets/woodnymph1.png");
   backdrop = loadImage("assets/background.png");
   birdex = loadImage("assets/birdex.png");
-  leaf = loadImage("assets/leaf.png");
-  leaf1 = loadImage("assets/leaf1.png");
-
   flower = loadImage("assets/flower.png");
 }
 
@@ -71,12 +59,7 @@ function setup() {
    for (var i = 0; i < 10; i++) {
     fairy2.push(new Particle(1000, 180, "fairy2"));
   }
-
- 
-
-
 }
-
 
 function draw() {
   background(255);
@@ -84,7 +67,6 @@ function draw() {
   textSize(24);
   fill(0, 102, 153);
   text("How can a flute portray a character through music? Click on the water fairy, forest fairy or bird to see their emotions come to life.", 10, 10, 500, 500);
-
 
   //WATER FAIRY
   noStroke();
@@ -186,7 +168,6 @@ function draw() {
   drawSprites();
   pop();
 }
-
 
 function Particle(x, y, type) {
   this.x = x;
