@@ -17,4 +17,5 @@ This project was built using the P5 Javascript library.
 - [@mackmilllr](https://twitter.com/mackmilllr) Coder
 - [@zevensuy](https://twitter.com/Zevensuy) Advisor
 
+Content last updated December 2016.
 
